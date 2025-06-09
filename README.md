@@ -59,7 +59,14 @@ The system applies the following **13 transformation layers** sequentially:
 
 Each layer contributes a unique cryptographic or obfuscatory transformation, and together they aim to simulate the behavior of a layered defense model in secure communication protocols.
 
+## Passphrase Requirement
 
+The system requires the user to enter a **passphrase** before encryption or decryption can proceed.  
+This passphrase is the **reverse of the word "passphrase"** (`"esarhpssap"`).
+
+The passphrase is crucial because it is used to generate the **master key and nonce** via PBKDF2 key derivation with a fixed salt.  
+These cryptographic parameters are essential to correctly encode and decode messages within the 13-layer system.  
+Entering the wrong passphrase will deny access and prevent any operation to be done.
 
 ## Compact Encoding & Decoding
 
@@ -90,6 +97,7 @@ if __name__ == "__main__":
 
 ### Usage
 
+- Enter the passphrase `"esarhpssap"` at the prompt to authenticate.
 - Type `'e'` to encrypt a plaintext message.
 - Type `'d'` to decrypt a compact Base62 string.
 - Type `'q'` to quit the interface.
@@ -99,25 +107,21 @@ Internally, the CLI handles secure key and nonce generation, exception handling,
 ## Example CLI Session
 
 ```plaintext
+Enter passphrase: esarhpssap
 Type 'e' to encode, 'd' to decode, or 'q' to quit.
 
 Your choice (e/d/q): e
-Enter plaintext:
-Hello world
+Enter plaintext: Hello World
 
-Super-Compact (one-field): s6iuA2tFCEQXV2gVwu1ODgqvbDdnkJfSrnWSL1XjCQJ
-```
+Super-Compact (one-field): fF78UWiaeBMUfHOWGJY3GRVTo1LcUTBrSeA6NoD2wSB
 
-```plaintext
 Your choice (e/d/q): d
-Paste Super-Compact string:
-s6iuA2tFCEQXV2gVwu1ODgqvbDdnkJfSrnWSL1XjCQJ
+Paste Super-Compact string: fF78UWiaeBMUfHOWGJY3GRVTo1LcUTBrSeA6NoD2wSB
 
-Plaintext:
-Hello world
+Plaintext: Hello World
+
+Your choice (e/d/q): q
 ```
-
-
 
 ## Security Disclaimer
 
@@ -132,14 +136,12 @@ This encryption system is intended for **educational and demonstrational purpose
 
 Please note that this project is currently **unpublished** and undergoing continued development. Formal publication is pending.
 
-
 ## License
 
 This repository is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.  
 You are free to use, modify, and distribute this work under the terms of the GPL-3.0 license.
 
 For full details, please refer to the [`LICENSE`](LICENSE) file included in this repository.
-
 
 ## Author
 
